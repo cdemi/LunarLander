@@ -8,10 +8,10 @@ var GameState = function (game) {
 
 // Load images and sounds
 GameState.prototype.preload = function () {
-    this.game.load.spritesheet('ship', '/images/ship.png', 32, 32);
-    this.game.load.image('ground', '/images/ground.png');
-    this.game.load.spritesheet('explosion', '/images/explosion.png', 128, 128);
-    this.game.load.audio('spaceMusic', '/sounds/background.mp3');
+    this.game.load.spritesheet('ship', 'images/ship.png', 32, 32);
+    this.game.load.image('ground', 'images/ground.png');
+    this.game.load.spritesheet('explosion', 'images/explosion.png', 128, 128);
+    this.game.load.audio('spaceMusic', 'sounds/background.mp3');
 };
 
 // Setup the example
