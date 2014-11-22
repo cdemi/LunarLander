@@ -3,19 +3,20 @@
 // Copyright © 2014 John Watson
 // Licensed under the terms of the MIT License
 
-var GameState = function (game) {
+var GameState = function(game) {
 };
 
 // Load images and sounds
-GameState.prototype.preload = function () {
+GameState.prototype.preload = function() {
     this.game.load.spritesheet('ship', 'images/ship.png', 32, 32);
     this.game.load.image('ground', 'images/ground.png');
     this.game.load.spritesheet('explosion', 'images/explosion.png', 128, 128);
     this.game.load.audio('spaceMusic', 'sounds/background.mp3');
+    this.game.load.audio('explosionSound', 'sounds/explosion.mp3');
 };
 
 // Setup the example
-GameState.prototype.create = function () {
+GameState.prototype.create = function() {
     // Set stage background color
     this.game.stage.backgroundColor = 0x333333;
 
@@ -27,8 +28,11 @@ GameState.prototype.create = function () {
     this.GRAVITY = 50; // pixels/second/second
 
     //Add background music
-    this.music = this.game.add.audio("spaceMusic");
+    this.music = this.game.add.audio("spaceMusic", 1, true);
     this.music.play();
+
+    //Add Explosion Sound
+    this.explosionSound = this.game.add.audio('explosionSound');
 
     // Add the ship to the stage
     this.ship = this.game.add.sprite(0, 0, 'ship');
@@ -88,7 +92,7 @@ GameState.prototype.create = function () {
 // If an explosion isn't available, create a new one and add it to the group.
 // Setup new explosions so that they animate and kill themselves when the
 // animation is complete.
-GameState.prototype.getExplosion = function (x, y) {
+GameState.prototype.getExplosion = function(x, y) {
     // Get the first dead explosion from the explosionGroup
     var explosion = this.explosionGroup.getFirstDead();
 
@@ -118,6 +122,9 @@ GameState.prototype.getExplosion = function (x, y) {
     // Set rotation of the explosion at random for a little variety
     explosion.angle = this.game.rnd.integerInRange(0, 360);
 
+    //Play the sound
+    this.explosionSound.play();
+
     // Play the animation
     explosion.animations.play('boom');
 
@@ -125,7 +132,7 @@ GameState.prototype.getExplosion = function (x, y) {
     return explosion;
 };
 
-GameState.prototype.resetShip = function () {
+GameState.prototype.resetShip = function() {
     // Move the ship back to the top of the stage
     this.ship.x = 32;
     this.ship.y = 32;
@@ -137,7 +144,7 @@ GameState.prototype.resetShip = function () {
 };
 
 // The update() method is called every frame
-GameState.prototype.update = function () {
+GameState.prototype.update = function() {
     if (this.game.time.fps !== 0) {
         this.fpsText.setText(this.game.time.fps + ' FPS');
     }
@@ -199,7 +206,7 @@ GameState.prototype.update = function () {
 // This function should return true when the player activates the "go left" control
 // In this case, either holding the right arrow or tapping or clicking on the left
 // side of the screen.
-GameState.prototype.leftInputIsActive = function () {
+GameState.prototype.leftInputIsActive = function() {
     var isActive = false;
 
     isActive = this.input.keyboard.isDown(Phaser.Keyboard.LEFT);
@@ -212,7 +219,7 @@ GameState.prototype.leftInputIsActive = function () {
 // This function should return true when the player activates the "go right" control
 // In this case, either holding the right arrow or tapping or clicking on the right
 // side of the screen.
-GameState.prototype.rightInputIsActive = function () {
+GameState.prototype.rightInputIsActive = function() {
     var isActive = false;
 
     isActive = this.input.keyboard.isDown(Phaser.Keyboard.RIGHT);
@@ -225,7 +232,7 @@ GameState.prototype.rightInputIsActive = function () {
 // This function should return true when the player activates the "jump" control
 // In this case, either holding the up arrow or tapping or clicking on the center
 // part of the screen.
-GameState.prototype.upInputIsActive = function () {
+GameState.prototype.upInputIsActive = function() {
     var isActive = false;
 
     isActive = this.input.keyboard.isDown(Phaser.Keyboard.UP);

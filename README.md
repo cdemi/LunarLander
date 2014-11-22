@@ -6,3 +6,4 @@ You may find a working demo at: [http://cdemi.github.com/LunarLander](https://cd
 
 # Resources #
 - Background Music: [Sky](http://audiojungle.net/item/sky/86936) by [AudioQuattro](http://audiojungle.net/user/AudioQuattro) from [AudioJungle](http://audiojungle.net/)
+- Explosion: [Simple Explosion](http://audiojungle.net/item/simple-explosion/88128) by [TheYoungDude](http://audiojungle.net/user/TheYoungDude) from [AudioJungle](http://audiojungle.net/)
